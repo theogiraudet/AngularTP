@@ -1,19 +1,23 @@
-<!--<mat-form-field>
-  <mat-label>ID du Pokémon : </mat-label>
-  <input matInput type="text" id="pokeId2" name="pokeId"  placeholder="Ex. Pikachu, Bulbizarre...">
-</mat-form-field>-->
-<label for="pokeId"> ID du Pokémon : </label>
-<input type="number" id="pokeId" name="pokeId" [(ngModel)]="id"/>
-<br/>
-<!--<input type="number" id="pokeIdRO" name="pokeId" readonly=true [(ngModel)]="id" value={{id}}/>-->
-<label for="pokeFilter">Filtre : </label>
-<input type="text" id="pokeFilter" name="pokeFilter" [(ngModel)]="filterValue"/>
-<br/>
-<label>
-  <select [(ngModel)]="id">
-    <option *ngFor="let pok of pokemons | filterPokemonPipe: filterValue" [value]="pok.id">{{pok.name}}</option>
-  </select>
-</label>
-<br/>
-<button mat-raised-button color="primary" (click)="onGo()">Go !</button>
-<p id="textId"></p>
+<div id="content">
+  <mat-form-field appearance="fill">
+    <mat-label>ID du Pokémon</mat-label>
+    <input matInput type="text" id="pokeId" name="pokeId" [(ngModel)]="id">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Filtre</mat-label>
+    <input matInput type="text" id="pokeFilter" name="pokeFilter" placeholder="Ex. Pikachu, Bulbizarre..."
+           [(ngModel)]="filterValue">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select [(ngModel)]="id">
+      <mat-option *ngFor="let pok of pokemons | filterPokemonPipe: filterValue"
+                  [value]="pok.id">{{pok.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="onGo()">Go !</button>
+  <p id="textId"></p>
+</div>
