@@ -13,12 +13,14 @@ import {MatOptionModule} from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import {PokeapiService} from './pokeapi.service';
+import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyComponentComponent,
-    FilterPokemonPipePipe
+    FilterPokemonPipePipe,
+    PokemonInfoComponent
   ],
   imports: [
     FormsModule,

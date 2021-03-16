@@ -13,11 +13,14 @@
   <mat-form-field appearance="fill">
     <mat-label>Select</mat-label>
     <mat-select [(ngModel)]="id">
-      <mat-option *ngFor="let pok of pokemons | filterPokemonPipe: filterValue"
+      <mat-option *ngFor="let pok of getPokemons() | filterPokemonPipe: filterValue"
                   [value]="pok.id">{{pok.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="onGo()">Go !</button>
-  <p id="textId"></p>
+
+  <div *ngIf="details">
+    <app-pokemon-info [detail]='details'></app-pokemon-info>
+  </div>
 </div>

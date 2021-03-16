@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Pokemon} from '../pokemon';
+import {Pokemon, PokemonDetail} from '../pokemon';
 import {PokeapiService} from '../pokeapi.service';
 
 @Component({
@@ -11,7 +11,8 @@ export class MyComponentComponent implements OnInit {
 
   id = '';
   filterValue = '';
-  pokemons: Pokemon[] = [];
+  pokemons = new Map<number, Pokemon>();
+  details: PokemonDetail;
 
   constructor(private pokeapiService: PokeapiService) {
     /*this.pokemons.push(new Pokemon(1, 'Bulbizarre'));
@@ -23,18 +24,21 @@ export class MyComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pokeapiService.getPokemons().subscribe(data => {
-      data.results.forEach((e, index) => this.pokemons.push(new Pokemon(index, e.name)));
-      console.log(this.pokemons);
-    });
+    this.pokeapiService.getPokemons().subscribe(data => data.results.forEach((e, index) =>
+      this.pokemons.set(this.getIndex(e.url), new Pokemon(this.getIndex(e.url), e.name.split('-').join(' '))))
+    );
   }
 
-  printPokemons(): void {
+  getPokemons(): Pokemon[] {
+    return Array.from(this.pokemons.values());
+  }
 
+  private getIndex(url: string): number {
+    return Number.parseInt(url.split('/').slice(-2).join(''), 10);
   }
 
   onGo(): void {
-    document.getElementById('textId').innerText = this.id;
+    this.pokeapiService.getPokemonInformation(this.id).subscribe(data => this.details = data);
   }
 
 }
