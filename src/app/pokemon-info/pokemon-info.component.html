@@ -1,0 +1,9 @@
+<div class="infos">
+  <img style="float: left;" src="{{detail.sprites.front_default}}"
+        alt="" width="96" height="96"/>
+  Nom : {{detail.name.split('-').join(' ')}}<br/>
+  <span *ngIf="getIndex()">Numéro national : {{getIndex()}}<br/></span>
+  <span *ngIf="getTypes">Types : {{getTypes().join(", ")}}<br/></span>
+  <span *ngIf="getAbilities(false)">Talents : {{getAbilities(false).join(", ")}}<br/></span>
+  <span *ngIf="getAbilities(true)">Talents cachés : {{getAbilities(true).join(", ")}}</span>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Pokemon, PokemonDetail} from '../pokemon';
 import {PokeapiService} from '../pokeapi.service';
+import {PokeShareInfoService} from '../poke-share-info.service';
 
 @Component({
   selector: 'app-my-component',
@@ -14,14 +15,8 @@ export class MyComponentComponent implements OnInit {
   pokemons = new Map<number, Pokemon>();
   details: PokemonDetail;
 
-  constructor(private pokeapiService: PokeapiService) {
-    /*this.pokemons.push(new Pokemon(1, 'Bulbizarre'));
-    this.pokemons.push(new Pokemon(2, 'Herbizarre'));
-    this.pokemons.push(new Pokemon(3, 'Florizarre'));
-    this.pokemons.push(new Pokemon(4, 'Salamèche'));
-    this.pokemons.push(new Pokemon(5, 'Reptincel'));
-    this.pokemons.push(new Pokemon(6, 'Dracaufeu'));*/
-  }
+  constructor(private pokeapiService: PokeapiService, private pokeShareService: PokeShareInfoService) {}
+
 
   ngOnInit(): void {
     this.pokeapiService.getPokemons().subscribe(data => data.results.forEach((e, index) =>
@@ -39,6 +34,7 @@ export class MyComponentComponent implements OnInit {
 
   onGo(): void {
     this.pokeapiService.getPokemonInformation(this.id).subscribe(data => this.details = data);
+    this.pokeShareService.setValue(this.id);
   }
 
 }
