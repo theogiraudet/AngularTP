@@ -19,8 +19,5 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="onGo()">Go !</button>
-
-  <div class="details" *ngIf="details">
-    <app-pokemon-info [detail]='details'></app-pokemon-info>
-  </div>
+  <app-pokemon-info></app-pokemon-info>
 </div>

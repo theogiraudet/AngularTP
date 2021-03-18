@@ -13,7 +13,6 @@ export class MyComponentComponent implements OnInit {
   id = '';
   filterValue = '';
   pokemons = new Map<number, Pokemon>();
-  details: PokemonDetail;
 
   constructor(private pokeapiService: PokeapiService, private pokeShareService: PokeShareInfoService) {}
 
@@ -33,7 +32,6 @@ export class MyComponentComponent implements OnInit {
   }
 
   onGo(): void {
-    this.pokeapiService.getPokemonInformation(this.id).subscribe(data => this.details = data);
     this.pokeShareService.setValue(this.id);
   }
 

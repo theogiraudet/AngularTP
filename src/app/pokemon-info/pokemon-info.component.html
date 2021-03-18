@@ -1,4 +1,4 @@
-<div class="infos">
+<div class="infos" *ngIf="detail">
   <img style="float: left;" src="{{detail.sprites.front_default}}"
         alt="" width="96" height="96"/>
   Nom : {{detail.name.split('-').join(' ')}}<br/>

@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PokemonDetail} from '../pokemon';
 import {PokeShareInfoService} from '../poke-share-info.service';
+import {PokeapiService} from '../pokeapi.service';
 
 @Component({
   selector: 'app-pokemon-info',
@@ -8,15 +9,14 @@ import {PokeShareInfoService} from '../poke-share-info.service';
   styleUrls: ['./pokemon-info.component.css']
 })
 export class PokemonInfoComponent implements OnInit {
-
-  @Input('detail')
   detail: PokemonDetail;
 
-  constructor(private pokeShareService: PokeShareInfoService) {
+  constructor(private pokeShareService: PokeShareInfoService, private pokeapiService: PokeapiService) {
   }
 
   ngOnInit(): void {
-    this.pokeShareService.getObservable().subscribe(e => console.log(e));
+    this.pokeShareService.getObservable()
+      .subscribe(id => this.pokeapiService.getPokemonInformation(id).subscribe(data => this.detail = data));
   }
 
   getIndex(): number {
